@@ -1,0 +1,22 @@
+# pragma version ^0.4.0
+
+"""
+@notice Interface for internal asset operations
+"""
+
+
+@internal
+def _get_balance(tokenId: uint256) -> uint256:
+    ...
+
+@internal
+def _transfer(from_: address, to: address, id: uint256, value: uint256):
+    ...
+
+@internal
+def _mint(conditionId: bytes32, amount: uint256):
+    ...
+
+@internal
+def _merge(conditionId: bytes32, amount: uint256):
+    ...

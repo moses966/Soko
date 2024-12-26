@@ -1,0 +1,16 @@
+# pragma version ^0.4.0
+
+struct Order:
+    salt: uint256                      # Unique salt to ensure entropy
+    maker: address                     # Maker of the order, source of funds
+    signer: address                    # Signer of the order
+    taker: address                     # Address of the order taker (zero for public order)
+    tokenId: uint256                   # Token ID for ERC1155 asset
+    makerAmount: uint256               # Maximum amount of tokens to be sold
+    takerAmount: uint256               # Minimum amount of tokens to be received
+    expiration: uint256                # Timestamp after which the order is expired
+    nonce: uint256                     # Nonce for on-chain cancellations
+    feeRateBps: uint256                # Fee rate in basis points charged on proceeds
+    side: uint8                        # Side of the order (0 = BUY, 1 = SELL)
+    signatureType: uint8               # Signature type (e.g., EOA, POLY_PROXY, etc.)
+    signature: Bytes[65]               # Order signature (assume ECDSA with 65 bytes)

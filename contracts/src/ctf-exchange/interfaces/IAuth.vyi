@@ -1,0 +1,55 @@
+# pragma version ^0.4.0
+
+"""
+@notice Interface for the Authorization contract
+"""
+event NewAdmin:
+    newAdminAddress: indexed(address)
+    admin: indexed(address)
+
+event NewOperator:
+    newOperatorAddress: indexed(address)
+    admin: indexed(address)
+
+event RemovedAdmin:
+    removedAdmin: indexed(address)
+    admin: indexed(address)
+
+event RemovedOperator:
+    removedOperator: indexed(address)
+    admin: indexed(address)
+
+
+@external
+@view
+def is_admin(account: address) -> bool:
+    return ...
+
+@external
+@view
+def is_operator(account: address) -> bool:
+    return ...
+
+@external
+def add_admin(account: address):
+    ...
+
+@external
+def add_operator(account: address):
+    ...
+
+@external
+def remove_admin(account: address):
+    ...
+
+@external
+def remove_operator(account: address):
+    ...
+
+@external
+def renounce_adminRole():
+    ..
+
+@external
+def renounce_operatorRole():
+    ...

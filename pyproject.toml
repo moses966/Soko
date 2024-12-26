@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "soko"
+version = "0.1.0"
+description = "A Simple Prediction market"
+authors = ["moses966 <mosikoproducts@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+eth-ape = {extras = ["recommended-plugins"], version = "^0.8.23"}
+snekmate = "^0.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

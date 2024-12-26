@@ -1,0 +1,11 @@
+{
+    "address_whitelist": "0x4C1A2a1CE7E3b938a1F4e391c99a7d37C9400271",
+    "currency_address": "0x402Bf9de16002D8d6b15694cBDE1E4A335C15DC3",
+    "finder_address": "0x649D25eCAc7abDB9eBFE4b3DDdDf153915Cb976C",
+    "ancillary_data_address": "0xdd15f38B0AAe8160Bcd15C1f419ae4B10eb51c9B",
+    "OOV3_address": "",
+    "outcome1_token_address": "0xdD33e7fBea6ef960C53C05Ba8F3bB4875e90b5B0",
+    "outcome2_token_address": "0x5217A7FcCD43C74145Ba511F08306354221A3F22",
+    "store_contract_address": "0x323ed4DddEa746769f6D1B3F449D723Fe8bb66C7",
+    "mock_oracle_address": "0x6574C4f3136CfF15A6FdBDdd37fe52862692820C"
+}
