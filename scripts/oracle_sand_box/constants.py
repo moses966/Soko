@@ -39,3 +39,11 @@ empty_address = f"0x0000000000000000000000000000000000000000"
 # Initialize FixedPoint.Unsigned structures with raw values
 fixed_oracle_fee = {"rawValue": 0}  # Represents FixedPoint.Unsigned(0)
 weekly_delay_fee = {"rawValue": 0}  # Represents FixedPoint.Unsigned(0)
+
+
+# Market constants
+description = f"Manchester United Won the 2018 Champions League."
+outcome_one = f"YES"
+outcome_two = f"NO"
+reward = int(100e18)
+required_bond = int(5000e18)

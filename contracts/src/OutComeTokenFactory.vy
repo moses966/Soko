@@ -15,7 +15,7 @@ def __init__(_target: address):
     target = _target
 
 @external
-def deploy_outcome1_token(
+def deploy_outcome_token(
     _name: String[22],
     _symbol: String[5],
     _decimals: uint8

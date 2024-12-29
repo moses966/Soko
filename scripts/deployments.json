@@ -1,12 +1,14 @@
 {
-    "address_whitelist": "0x6ee44972Aa07898053132ED9A0b2f46CBaCf6293",
-    "currency_address": "0x53E7fBE9EBeF326e6b377fCf0A9d73f9B71F1c04",
-    "finder_address": "0x30a25c0BfD907fB031e070572ae777b93963A700",
-    "ancillary_data_address": "0x1B349F1220AD345D5B0822dcB088a1bD730Cd19f",
-    "OOV3_address": "0x803d2727Eb4c96A0ad0174bD570965eA01349A12",
-    "outcome1_token_address": "0x98946941828a3094c5f509d7d130a59ef0F3e9a9",
-    "outcome2_token_address": "0x7ECe87ae6A046b475A659F35626E83c812a4030D",
-    "store_contract_address": "0xfFd0d91Fe0a7078b27caFbD72FFd78EfD13F6adD",
-    "mock_oracle_address": "0x9d7D6C098f28499d47882ca8f6ACaDbF18d3B289",
-    "identifier_address": "0x30b42766C5A5bAf80B383da3A5B57D5E000451ee"
+    "address_whitelist": "0xBa2b93d9cB6e6e356e50fb88e11C2D2Eca6e8576",
+    "currency_address": "0xf6AfE7Eb189cC8ea62a08dcea5EaE328d3Bd1040",
+    "finder_address": "0x205E40756fe968B33D5AB59CC61eAE39bc848CbA",
+    "ancillary_data_address": "0xd606e6725E030099024091eE411495593cB18F9D",
+    "OOV3_address": "0x30b42766C5A5bAf80B383da3A5B57D5E000451ee",
+    "outcome1_token_address": "0xEED76E94E50E8DF67B36c48F8A9944f52DdF839b",
+    "outcome2_token_address": "0x9708F40a69E51e0ABBae0c584d8c63b98bAa97bc",
+    "store_contract_address": "0x8E6632E9D06Eb6C92cB99202d1dCF69C526d1f83",
+    "mock_oracle_address": "0x604DFb419ccF02F60ECD08C70AE841a1320466d1",
+    "identifier_address": "0xfFd0d91Fe0a7078b27caFbD72FFd78EfD13F6adD",
+    "market": "",
+    "market_id": "0x"
 }
