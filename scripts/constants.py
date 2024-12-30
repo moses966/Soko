@@ -29,10 +29,8 @@ currency_initial_supply = int(1000000e18)
 currency_name_eip712 = f"Currency"
 currency_version_eip712 = f"1"
 default_currency_decimal = int(18)
-token1_name = f"Outcome1 Token"
-token1_symbol = f"OUT1"
-token2_name = f"Outcome2 Token"
-token2_symbol = f"OUT2"
+token_name = f"Outcome Token"
+token_symbol = f"OT"
 decimals = int(18)
 empty_address = f"0x0000000000000000000000000000000000000000"
 
@@ -47,3 +45,4 @@ outcome_one = f"YES"
 outcome_two = f"NO"
 reward = int(100e18)
 required_bond = int(5000e18)
+amount = int(10000e18)

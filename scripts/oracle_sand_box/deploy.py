@@ -1,5 +1,9 @@
+import os
+import sys
 
-from .oracle import OracleContracts
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
+from scripts.oracle_sand_box.oracle import OracleContracts
 
 def main():
     oracle_contracts = OracleContracts()

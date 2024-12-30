@@ -83,7 +83,6 @@ whitelist_instance: IAddressWhitelist
 ancillary_data_instance: IAncillaryDataInterface
 OOv3_instance: immutable(IOptimisticOracleV3) # Optimistic Oracle V3 interface
 OOv3_callback_instance: IOptimisticOracleV3CallbackRecipient
-expandederc20_target_address: immutable(address)
 markets: public(HashMap[bytes32, Market])
 asserted_markets: public(HashMap[bytes32, AssertedMarket])
 currency: immutable(IERC20)  # Currency used for all prediction markets
@@ -99,7 +98,6 @@ interface OutComeTokenFactory:
 @deploy
 @payable
 def __init__(
-    _expanded_erc20: address,
     _finder: address,
     _address_whitelist: address,
     _oov3: address,
@@ -108,7 +106,6 @@ def __init__(
     _outcome_token_factory: address
 ):
    """
-   @param _expanded_erc20 `target` address for the ExpandedERC20 token contract.
    @param _finder Finder address
    @param _address_whitelist address for the AddressWhitelist contract.
    @param _oov3 OptimisticOracleV3 contract address
@@ -116,7 +113,6 @@ def __init__(
    @param _currency Whitelisted token address
     @param _outcome_token_factory OutcomeTokenFactory contract address
    """
-   expandederc20_target_address = _expanded_erc20
    self.finder_instance = FinderInterface(_finder)
    self.whitelist_instance = IAddressWhitelist(_address_whitelist)
    OOv3_instance = IOptimisticOracleV3(_oov3)
@@ -160,11 +156,13 @@ def initialize_market(
         "O1T",
         _decimals
     )
+    assert outcome1_token_address != empty(address), "Outcome1 token creation failed"
     outcome2_token_address: address = extcall OutComeTokenFactory(outcome_token_factory).deploy_outcome_token(
         concat(outcome2, " Token"),
         "O2T",
         _decimals
     )
+    assert outcome2_token_address != empty(address), "Outcome2 token creation failed"
 
     extcall ExpandedIERC20(outcome1_token_address).add_minter(self)
     extcall ExpandedIERC20(outcome2_token_address).add_minter(self)

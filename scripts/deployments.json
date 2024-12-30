@@ -1,14 +1,16 @@
 {
-    "address_whitelist": "0xBa2b93d9cB6e6e356e50fb88e11C2D2Eca6e8576",
-    "currency_address": "0xf6AfE7Eb189cC8ea62a08dcea5EaE328d3Bd1040",
-    "finder_address": "0x205E40756fe968B33D5AB59CC61eAE39bc848CbA",
-    "ancillary_data_address": "0xd606e6725E030099024091eE411495593cB18F9D",
-    "OOV3_address": "0x30b42766C5A5bAf80B383da3A5B57D5E000451ee",
-    "outcome1_token_address": "0xEED76E94E50E8DF67B36c48F8A9944f52DdF839b",
-    "outcome2_token_address": "0x9708F40a69E51e0ABBae0c584d8c63b98bAa97bc",
-    "store_contract_address": "0x8E6632E9D06Eb6C92cB99202d1dCF69C526d1f83",
-    "mock_oracle_address": "0x604DFb419ccF02F60ECD08C70AE841a1320466d1",
-    "identifier_address": "0xfFd0d91Fe0a7078b27caFbD72FFd78EfD13F6adD",
-    "market": "",
-    "market_id": "0x"
+    "address_whitelist": "0xfFd0d91Fe0a7078b27caFbD72FFd78EfD13F6adD",
+    "currency_address": "0x9708F40a69E51e0ABBae0c584d8c63b98bAa97bc",
+    "finder_address": "0xBa2b93d9cB6e6e356e50fb88e11C2D2Eca6e8576",
+    "ancillary_data_address": "0xf6AfE7Eb189cC8ea62a08dcea5EaE328d3Bd1040",
+    "OOV3_address": "0x251B4316902848207eEF2d4023fEbeBd25b6EBB3",
+    "outcome1_token_address": "0xd46cf58ab6d410C07f82d94A59f16180c7Aeb8a5",
+    "outcome2_token_address": "0x5483301B9281288054De250F868aadf3c5e5fC1F",
+    "store_contract_address": "0x604DFb419ccF02F60ECD08C70AE841a1320466d1",
+    "mock_oracle_address": "0xEED76E94E50E8DF67B36c48F8A9944f52DdF839b",
+    "identifier_address": "0x1B349F1220AD345D5B0822dcB088a1bD730Cd19f",
+    "market_address": "0x2A041d288f5d89f216E344CBC59eF063b63216C6",
+    "expanded_token_blueprint_address": "0x537eF82dC0e2d54A45ef3eaE49A57957950186E7",
+    "outcome_token_factory_address": "0x74388D9Ad7522061b65cF776689A51dF79C8C9F1",
+    "market_id": "0x86d3f4feab72ccb4c5ca85b63da184371efcb1503f559e568ec68bac1e29e9e1"
 }

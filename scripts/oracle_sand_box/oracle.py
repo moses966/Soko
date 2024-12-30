@@ -1,6 +1,6 @@
 from ape import accounts, project
-from . import constants
-from .utils import edit_value
+from .. import constants
+from ..utils import edit_value
 
 
 class OracleContracts:
@@ -61,22 +61,6 @@ class OracleContracts:
         address_whitelist_contract = deployer.deploy(project.AddressWhitelistContract)
         edit_value("address_whitelist", address_whitelist_contract.address)
         self.whitelist = address_whitelist_contract.address
-
-        # Deploy Outcome Tokens
-        outcome1_token_contract = deployer.deploy(
-            project.ExpandedERC20,
-            constants.token1_name,
-            constants.token1_symbol,
-            constants.decimals,
-        )
-        outcome2_token_contract = deployer.deploy(
-            project.ExpandedERC20,
-            constants.token2_name,
-            constants.token2_symbol,
-            constants.decimals,
-        )
-        edit_value("outcome1_token_address", outcome1_token_contract.address)
-        edit_value("outcome2_token_address", outcome2_token_contract.address)
 
         # Deploy IdentifierWhitelistContract
         identifier_contract = deployer.deploy(project.IdentifierWhitelistContract)
