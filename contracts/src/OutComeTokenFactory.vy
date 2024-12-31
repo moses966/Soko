@@ -32,7 +32,7 @@ def deploy_outcome_token(
         target,
         _name,
         _symbol,
-        _decimals
+        _decimals,
     )
 
     return new_contract_address

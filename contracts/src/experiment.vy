@@ -260,12 +260,14 @@ def create_outcome_tokens(market_id: bytes32, tokens_to_create: uint256):
         scope of this contract. The caller must approve this contract to spend the currency tokens.
     """
     market: Market = self.markets[market_id]
-    assert market.outcome1_token != empty(address), "Market does not exist"
+    ot1: address = market.outcome1_token
+    ot2: address = market.outcome2_token
+    assert ot1 != empty(address), "Market does not exist"
 
     extcall currency.transferFrom(msg.sender, self, tokens_to_create, default_return_value=True)
-
-    extcall ExpandedIERC20(market.outcome1_token).mint(msg.sender, tokens_to_create)
-    extcall ExpandedIERC20(market.outcome2_token).mint(msg.sender, tokens_to_create)
+    
+    extcall ExpandedIERC20(ot1).mint(msg.sender, tokens_to_create)
+    extcall ExpandedIERC20(ot2).mint(msg.sender, tokens_to_create)
     log TokensCreated(market_id, msg.sender, tokens_to_create)
 
 @external

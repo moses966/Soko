@@ -15,7 +15,7 @@ def burn(_value: uint256):
     ...
 
 @external
-def burn_from(recipient: address, _value: uint256) -> bool:
+def burn_from(recipient: address, _value: uint256):
     """
     @dev Burns `_value` tokens owned by `recipient`.
     @param recipient The address to burn tokens from.
@@ -25,13 +25,12 @@ def burn_from(recipient: address, _value: uint256) -> bool:
     ...
 
 @external
-def mint(to: address, _value: uint256) -> bool:
+def mint(to: address, _value: uint256):
     """
     @notice Mints tokens and adds them to the balance of the `to` address.
     @dev This method should be permissioned to only allow designated parties to mint tokens.
     @param to The address to mint tokens to.
     @param _value The amount of tokens to mint.
-    @return A boolean indicating success.
     """
     ...
 

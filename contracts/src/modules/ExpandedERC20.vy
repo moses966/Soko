@@ -76,6 +76,7 @@ def add_minter(_account: address):
     @dev The caller must have the `MANAGER_ROLE` or `DEFAULT_ADMIN_ROLE` roles.
     @param _account The address to which the Minter role is added.
     """
+    #ctl._check_role(MANAGER_ROLE, msg.sender)
     ctl._grant_role(MINT_ROLE, _account)
     
 @external

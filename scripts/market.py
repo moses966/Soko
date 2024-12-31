@@ -1,7 +1,7 @@
 import sys
 import os
 from ape import accounts, project
-from eth_utils import to_bytes, to_hex
+from eth_utils import to_bytes, to_hex, keccak
 from hexbytes import HexBytes
 from scripts.utils import edit_value, get_value
 from scripts import constants
@@ -65,18 +65,6 @@ class PredictionMarketManager:
         self.market_address = contract.address
         print(f"Market deployed at: {self.market_address}")
 
-    def mint_and_approve_tokens1(self):
-        """Mint and approve tokens for the market."""
-        _address = get_value("market_address")
-        token = project.DefaultCurrency.at(self.currency, fetch_from_explorer=False)
-        token.mint(self.deployer, constants.reward, sender=self.deployer)
-        token.approve(_address, constants.reward, sender=self.deployer)
-
-        allowance = token.allowance(self.deployer, _address)
-        balance = token.balanceOf(self.deployer)
-        print(f"Minted and approved tokens for market at {_address}")
-        print(f"Balance: {balance}")
-        print(f"Allowance: {allowance}")
 
     def init_market(self):
         """Initialize the prediction market."""
@@ -120,19 +108,24 @@ class PredictionMarketManager:
 
     def create_outcome_tokens(self):
         """Create the outcome tokens."""
+
         _address = get_value("market_address")
         _id = get_value("market_id")
-        #_market_id = to_bytes(hexstr=_id)
         _market_id = HexBytes(_id)
 
-
+        # Mint and approve cuurrency tokens for use
         token = project.DefaultCurrency.at(self.currency, fetch_from_explorer=False)
         token.mint(self.deployer, constants.amount, sender=self.deployer)
         token.approve(_address, constants.amount, sender=self.deployer)
-        print(token.balanceOf(self.deployer))
+        balance = token.balanceOf(self.deployer)
+        print(f"Deployer's currency balance before creating outcome tokens: {balance / 1e18}")
 
         pred_market = project.experiment.at(_address, fetch_from_explorer=False)
+        print("Market Struct: ", pred_market.markets(_market_id)) # visually confirm market was initialized.
+
         pred_market.create_outcome_tokens(_market_id, constants.amount, sender=self.deployer)
+        balance = token.balanceOf(self.deployer)
+        print(f"Deployer's currency balance after creating outcome tokens: {balance / 1e18}")
 
         outcome_token_one = get_value("outcome1_token_address")
         outcome_token_two = get_value("outcome2_token_address")
@@ -142,8 +135,36 @@ class PredictionMarketManager:
         # With an amount 10,000 units of default_currency we get 10,000 outcome1_token and 10,000 outcome2_token tokens
         balance_one = token_one.balanceOf(self.deployer)
         balance_two = token_two.balanceOf(self.deployer)
-        print(f"Outcome token 1 balance: {balance_one}")
-        print(f"Outcome token 2 balance: {balance_two}")
+        print(f"Outcome token 1 balance: {balance_one / 1e18}")
+        print(f"Outcome token 2 balance: {balance_two / 1e18}")
+    
+    def redeem_outcome_tokens(self):
+        """
+        At any point before the market is settled we can redeem outcome tokens. 
+        By redeeming an amount we are burning the same amount of outcome-token_one 
+        and outcome_token_two to receive that amount of default_currency(currency).
+        """
+        _id = get_value("market_id")
+        _market_id = HexBytes(_id)
+        _address = get_value("market_address")
+        outcome_token_one = get_value("outcome1_token_address")
+        outcome_token_two = get_value("outcome2_token_address")
+
+        pred_market = project.experiment.at(_address, fetch_from_explorer=False)
+        pred_market.redeem_outcome_tokens(_market_id, constants.redeem_amount, sender=self.deployer)
+
+        # After redeeming 5,000 tokens we can see how both balances of outcome_token_one 
+        # and outcome_token_two have decreased by 5,000 and default_currency(currency) has increased that same amount.
+        token_one = project.ExpandedERC20.at(outcome_token_one, fetch_from_explorer=False)
+        token_two = project.ExpandedERC20.at(outcome_token_two, fetch_from_explorer=False)
+        token = project.DefaultCurrency.at(self.currency, fetch_from_explorer=False)
+
+        balance_one = token_one.balanceOf(self.deployer)
+        balance_two = token_two.balanceOf(self.deployer)
+        balance = token.balanceOf(self.deployer)
+        print(f"Outcome token 1 balance: {balance_one / 1e18}")
+        print(f"Outcome token 2 balance: {balance_two / 1e18}")
+        print(f"Deployer's currency balance after redeeming tokens: {balance / 1e18}")
 
 
 def main():
@@ -158,6 +179,8 @@ def main():
         manager.init_market()
     elif method_flag == 'create':
         manager.create_outcome_tokens()
+    elif method_flag == 'redeem':
+        manager.redeem_outcome_tokens()
     else:
         print("Invalid method number.")
 

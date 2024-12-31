@@ -1,9 +1,11 @@
-import os
-import sys
+from ape import project, accounts
 
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+def main():
+    deployer = accounts.load("account1")
+    contract = deployer.deploy(project.ExpandedERC20, "Expanded Token", "EXT", 18)
+    #contract.add_minter(deployer, sender=deployer)
+    contract.mint(deployer, int(100e18), sender=deployer)
+    print(contract.balanceOf(deployer) / 1e18)
 
-# Now imports like this should work
-#from scripts.oracle_sand_box.oracle import OracleContracts
+if __name__ == "__main__":
+    main()
