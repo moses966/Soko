@@ -11,7 +11,7 @@
 from contracts.src.modules import constants
 
 # Importing Defined Interfaces
-from ethereum.ercs import IERC20
+from contracts.src.modules.interfaces import IERC20
 from contracts.src.modules.interfaces import ExpandedIERC20
 from contracts.src.modules.interfaces import FinderInterface
 from contracts.src.modules.interfaces import IAddressWhitelist
@@ -85,7 +85,7 @@ OOv3_instance: immutable(IOptimisticOracleV3) # Optimistic Oracle V3 interface
 OOv3_callback_instance: IOptimisticOracleV3CallbackRecipient
 markets: public(HashMap[bytes32, Market])
 asserted_markets: public(HashMap[bytes32, AssertedMarket])
-currency: immutable(IERC20)  # Currency used for all prediction markets
+currency: public(immutable(IERC20))  # Currency used for all prediction markets
 assertion_liveness: constant(uint64) = 7200  # 2 hours
 default_identifier: immutable(bytes32)  # Default identifier for prediction markets
 unresolvable: constant(Bytes[16]) = b"Unresolvable"
@@ -226,32 +226,41 @@ def assert_market(market_id: bytes32, asserted_outcome: String[16]) -> bytes32:
     # Store the asserter and marketId for the assertionResolvedCallback.
     self.asserted_markets[assertion_id] = AssertedMarket(asserter=msg.sender, market_id=market_id)
 
+    # update markets
+    self.markets[market_id] = market
+
     log MarketAsserted(market_id, asserted_outcome, assertion_id)
 
     return assertion_id
 
 @external
-def assertion_resolved_callback(assertion_id: bytes32, asserted_truthfully: bool):
+def assertionResolvedCallback(assertion_id: bytes32, asserted_truthfully: bool):
     """
     @notice Callback from settled assertion.
         If the assertion was resolved true, then the asserter gets the reward and the market is marked as resolved.
         Otherwise, asserted_outcome_id is reset and the market can be asserted again.
     """
     assert msg.sender == OOv3_instance.address, "Not authorized"
-    market: Market = self.markets[self.asserted_markets[assertion_id].market_id]
+    _market_id: bytes32 = self.asserted_markets[assertion_id].market_id
+    market: Market = self.markets[_market_id]
     if asserted_truthfully:
         market.resolved = True
+        self.markets[_market_id] = market
         if market.reward > 0 :
             extcall currency.transfer(
                 self.asserted_markets[assertion_id].asserter,
                 market.reward,
                 default_return_value=True
             )
-            log MarketResolved(self.asserted_markets[assertion_id].market_id)
-        else:
-            market.asserted_outcome_id = empty(bytes32)
-            self.markets[self.asserted_markets[assertion_id].market_id] = market
-        self.asserted_markets[assertion_id] = empty(AssertedMarket) # delete record
+        log MarketResolved(self.asserted_markets[assertion_id].market_id)
+    else:
+        market.asserted_outcome_id = empty(bytes32)
+        self.markets[_market_id] = market
+    self.asserted_markets[assertion_id] = empty(AssertedMarket) # delete record
+
+@external
+def assertionDisputedCallback(assertionId: bytes32):
+    pass
 
 @external
 def create_outcome_tokens(market_id: bytes32, tokens_to_create: uint256):

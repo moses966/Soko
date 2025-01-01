@@ -46,13 +46,10 @@ class OracleContracts:
 
         # Deploy DefaultCurrency token contract
         default_currency_contract = deployer.deploy(
-            project.DefaultCurrency,
+            project.TestERC20,
             constants.default_currency_name,
             constants.default_currency_symbol,
-            constants.default_currency_decimal,
-            constants.currency_initial_supply,
-            constants.currency_name_eip712,
-            constants.currency_version_eip712,
+            constants.default_currency_decimal
         )
         edit_value("currency_address", default_currency_contract.address)
         self.default_currency = default_currency_contract.address
