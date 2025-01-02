@@ -25,3 +25,8 @@ OracleSpoke: constant(Bytes[11]) = b"OracleSpoke"
 # that a price can be requested to the OptimisticOracle successfully, but cannot be resolved by the DVM which
 # refuses to accept a price request made with ancillary data length over a certain size.
 ancillaryBytesLimit: constant(uint256) = 8192
+
+# Roles
+MINT_ROLE: public(constant(bytes32)) = keccak256("MINT_ROLE")
+BURN_ROLE: public(constant(bytes32)) = keccak256("BURN_ROLE")
+MANAGER_ROLE: public(constant(bytes32)) = keccak256("MANAGER_ROLE")

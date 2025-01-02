@@ -1,6 +1,5 @@
 import os
 import json
-import hashlib
 from typing import Any, Dict, List
 from hexbytes import HexBytes
 from eth_utils import keccak

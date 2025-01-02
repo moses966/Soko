@@ -40,7 +40,7 @@ weekly_delay_fee = {"rawValue": 0}  # Represents FixedPoint.Unsigned(0)
 
 
 # Market constants
-description = f"Manchester United Won the 2018 Champions League."
+description = f"Manchester United Won the 2008 Champions League Title."
 outcome_one = f"YES"
 outcome_two = f"NO"
 reward = int(100e18)

@@ -137,7 +137,7 @@ def get_market(market_id: bytes32) -> Market:
 def initialize_market(
     outcome1: String[16], # Short name of the first outcome.
     outcome2: String[16], # Short name of the second outcome.
-    description: String[720], # Description of the market.
+    description: String[720], # Description of the market(Limited to only Bytes[720]).
     reward: uint256, # Reward available for asserting true market outcome.
     required_bond: uint256 # Expected bond to assert market outcome (OOv3 can require higher bond).
 ):
